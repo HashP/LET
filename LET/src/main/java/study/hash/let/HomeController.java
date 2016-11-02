@@ -40,11 +40,10 @@ public class HomeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/encodingText") 
+	@RequestMapping(value="/encodingText",produces = "application/text; charset=utf8") 
 	public String encodingText(@RequestParam("targetText")String targetText) throws UnsupportedEncodingException {
 		
 		String result = "";
-		
 		
 		result += "utf-8(1) : " + new String(targetText.getBytes("utf-8"), "euc-kr") + "\n";
 		result += "utf-8(2) : " + new String(targetText.getBytes("utf-8"), "ksc5601") + "\n";
@@ -71,6 +70,8 @@ public class HomeController {
 		result += "x-windows-949(3) : " + new String(targetText.getBytes("x-windows-949"), "ksc5601") + "\n";
 		result += "x-windows-949(4) : " + new String(targetText.getBytes("x-windows-949"), "iso-8859-1") + "\n";
 		
+		logger.info("targetText : " + targetText);
+		logger.info("result\n" + result);
 		
 		return result;
 	}
